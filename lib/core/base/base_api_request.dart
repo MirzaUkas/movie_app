@@ -18,11 +18,10 @@ extension HTTPMethodString on HTTPMethod {
 }
 
 abstract class BaseApiRequest {
-  String get url;
   String get path;
   HTTPMethod get method;
-  Map<String, String>? get headers;
-  Map<String, String>? get query;
-  dynamic get body;
+  Map<String, String>? get headers => null;
+  Map<String, String>? get query => null;
+  dynamic get body => null;
   Future request();
 }
