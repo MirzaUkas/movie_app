@@ -4,7 +4,7 @@ import 'package:movie_app/data/service/api_service.dart';
 
 enum MovieType { list, search, detail }
 
-class MovieApi implements BaseApiRequest {
+class MovieApi extends BaseApiRequest {
   final MovieType type;
   String? keyword;
   int? page;
@@ -22,15 +22,6 @@ class MovieApi implements BaseApiRequest {
         page: page,
         pageSize: pageSize,
       );
-
-  @override
-  get body => throw UnimplementedError();
-
-  @override
-  Map<String, String>? get headers => {
-    "Authorization": "Bearer <<token>>",
-    "Content-Type": "application/json",
-  };
 
   @override
   HTTPMethod get method => HTTPMethod.get;
@@ -61,7 +52,4 @@ class MovieApi implements BaseApiRequest {
 
   @override
   Future request() => ApiService.instance.request(this);
-
-  @override
-  String get url => ApiConstants.baseUrl + path;
 }
