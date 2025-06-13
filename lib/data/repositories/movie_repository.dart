@@ -18,4 +18,10 @@ class MovieRepositoryImpl extends MovieRepository {
     return PagingModel.fromJson(response).toEntity();
   }
 
+  @override
+  Future<Paging> searchMovies(int page, int pageSize, String query) async{
+    final response = await MovieApi.searchMovies(page, pageSize, query).request();
+    return PagingModel.fromJson(response).toEntity();
+  }
+
 }

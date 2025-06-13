@@ -10,16 +10,16 @@ class MoviesController extends GetxController {
 
   final FetchMoviesUseCase _fetchMoviesUseCase;
   int _currentPage = 1;
-  int _pageSize = 20;
+  final int _pageSize = 20;
   var _isLoadMore = false;
-  var _paging = Rx<Paging?>(null);
+  final _paging = Rx<Paging?>(null);
 
   var movies = RxList<Movie>([]);
 
   fetchData(String keyword) async {
     _currentPage = 1;
     final newPaging = await _fetchMoviesUseCase.execute(
-      Tuple2(_currentPage, _pageSize),
+      Tuple3(_currentPage, _pageSize, keyword),
     );
     movies.assignAll(newPaging.results);
     _paging.value = newPaging;
@@ -32,7 +32,7 @@ class MoviesController extends GetxController {
     _isLoadMore = true;
     _currentPage += 1;
     final newPaging = await _fetchMoviesUseCase.execute(
-      Tuple2(_currentPage, _pageSize),
+      Tuple3(_currentPage, _pageSize, keyword),
     );
     movies.addAll(newPaging.results);
     _paging.value?.totalResults = newPaging.totalResults;

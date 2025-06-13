@@ -4,13 +4,16 @@ import 'package:tuple/tuple.dart';
 
 import '../entities/paging.dart';
 
-class FetchMoviesUseCase extends BaseParamUseCase<Paging, Tuple2<int, int>> {
+class FetchMoviesUseCase
+    extends BaseParamUseCase<Paging, Tuple3<int, int, String>> {
   final MovieRepository _repo;
 
   FetchMoviesUseCase(this._repo);
 
   @override
-  Future<Paging> execute(Tuple2 param) {
-    return _repo.fetchMovies(param.item1, param.item2);
+  Future<Paging> execute(Tuple3 param) {
+    return param.item3.toString().isNotEmpty
+        ? _repo.searchMovies(param.item1, param.item2, param.item3.toString())
+        : _repo.fetchMovies(param.item1, param.item2);
   }
 }

@@ -13,10 +13,3 @@ PagingModel _$PagingModelFromJson(Map<String, dynamic> json) => PagingModel(
           .toList(),
       page: (json['page'] as num).toInt(),
     );
-
-Map<String, dynamic> _$PagingModelToJson(PagingModel instance) =>
-    <String, dynamic>{
-      'total_results': instance.totalResults,
-      'page': instance.page,
-      'results': instance.results,
-    };

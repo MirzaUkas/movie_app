@@ -15,6 +15,9 @@ class MovieApi extends BaseApiRequest {
   MovieApi.fetchMovies(int page, int pageSize)
     : this._(type: MovieType.list, page: page, pageSize: pageSize);
 
+  MovieApi.searchMovies(int page, int pageSize, String keyword)
+      : this._(type: MovieType.search, page: page, pageSize: pageSize, keyword: keyword);
+
   MovieApi.detailMovie(String keyword, int page, int pageSize)
     : this._(
         type: MovieType.detail,
@@ -32,7 +35,7 @@ class MovieApi extends BaseApiRequest {
       case MovieType.list:
         return ApiConstants.movies;
       case MovieType.search:
-        return ApiConstants.discover;
+        return ApiConstants.search;
       case MovieType.detail:
         return ApiConstants.detail;
     }
@@ -42,9 +45,12 @@ class MovieApi extends BaseApiRequest {
   Map<String, String>? get query {
     switch (type) {
       case MovieType.list:
-        return {"language": "en-US", "page": "$page"};
+        return {"page": "$page"};
       case MovieType.search:
-        return {"language": "en-US", "page": "$page", "with_keywords": keyword ?? ""};
+        return {
+          "page": "$page",
+          "query": keyword ?? "",
+        };
       case MovieType.detail:
         return null;
     }
