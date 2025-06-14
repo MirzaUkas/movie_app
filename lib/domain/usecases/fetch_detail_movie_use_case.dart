@@ -8,7 +8,10 @@ class FetchDetailMovieUseCase extends BaseParamUseCase<Movie, int> {
   FetchDetailMovieUseCase(this._repo);
 
   @override
-  Future<Movie> execute(int id) {
-    return _repo.fetchDetailMovie(id);
+  Future<Movie> execute(int id) async {
+    final isFavorite = await _repo.getFavorite(id).then((e) => e != null);
+    return _repo
+        .fetchDetailMovie(id)
+        .then((movie) => movie.copyWith(isFavorite: isFavorite));
   }
 }
