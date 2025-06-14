@@ -59,18 +59,20 @@ class ApiService {
 }
 
 class AppException implements Exception {
-  final code;
-  final message;
-  final details;
+  final String? code;
+  final String? message;
+  final String? details;
 
   AppException({this.code, this.message, this.details});
 
+  @override
   String toString() {
     return "[$code]: $message \n $details";
   }
 }
 
 class FetchDataException extends AppException {
+
   FetchDataException(String? details)
     : super(
         code: "fetch-data",

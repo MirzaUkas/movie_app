@@ -8,23 +8,23 @@ class MovieApi extends BaseApiRequest {
   final MovieType type;
   String? keyword;
   int? page;
+  int? id;
   int? pageSize;
 
-  MovieApi._({required this.type, this.keyword, this.page, this.pageSize});
+  MovieApi._({required this.type, this.keyword, this.page, this.pageSize, this.id});
 
   MovieApi.fetchMovies(int page, int pageSize)
     : this._(type: MovieType.list, page: page, pageSize: pageSize);
 
   MovieApi.searchMovies(int page, int pageSize, String keyword)
-      : this._(type: MovieType.search, page: page, pageSize: pageSize, keyword: keyword);
-
-  MovieApi.detailMovie(String keyword, int page, int pageSize)
     : this._(
-        type: MovieType.detail,
-        keyword: keyword,
+        type: MovieType.search,
         page: page,
         pageSize: pageSize,
+        keyword: keyword,
       );
+
+  MovieApi.detailMovie(int id) : this._(type: MovieType.detail, id: id);
 
   @override
   HTTPMethod get method => HTTPMethod.get;
@@ -37,7 +37,7 @@ class MovieApi extends BaseApiRequest {
       case MovieType.search:
         return ApiConstants.search;
       case MovieType.detail:
-        return ApiConstants.detail;
+        return ApiConstants.detail + id.toString();
     }
   }
 
@@ -47,10 +47,7 @@ class MovieApi extends BaseApiRequest {
       case MovieType.list:
         return {"page": "$page"};
       case MovieType.search:
-        return {
-          "page": "$page",
-          "query": keyword ?? "",
-        };
+        return {"page": "$page", "query": keyword ?? ""};
       case MovieType.detail:
         return null;
     }

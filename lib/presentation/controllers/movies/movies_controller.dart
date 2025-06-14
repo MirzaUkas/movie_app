@@ -4,15 +4,18 @@ import 'package:tuple/tuple.dart';
 
 import '../../../domain/entities/movie.dart';
 import '../../../domain/entities/paging.dart';
+import '../../../domain/usecases/fetch_detail_movie_use_case.dart';
 
 class MoviesController extends GetxController {
-  MoviesController(this._fetchMoviesUseCase);
+  MoviesController(this._fetchMoviesUseCase, this._fetchDetailMovieUseCase);
 
   final FetchMoviesUseCase _fetchMoviesUseCase;
+  final FetchDetailMovieUseCase _fetchDetailMovieUseCase;
   int _currentPage = 1;
   final int _pageSize = 20;
   var _isLoadMore = false;
   final _paging = Rx<Paging?>(null);
+  var movie = Rx<Movie?>(null);
 
   var movies = RxList<Movie>([]);
 
@@ -23,6 +26,11 @@ class MoviesController extends GetxController {
     );
     movies.assignAll(newPaging.results);
     _paging.value = newPaging;
+  }
+
+  fetchDetail(int id) async {
+    final result = await _fetchDetailMovieUseCase.execute(id);
+    movie.value = result;
   }
 
   loadMore(String keyword) async {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/core/utils/size_util.dart';
+import 'package:movie_app/presentation/pages/detail/detail_page.dart';
 import 'package:movie_app/presentation/pages/home/home_page.dart';
 
 import 'core/di/dependency.dart';
@@ -28,8 +29,11 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeUtil.init(context);
     return GetMaterialApp(
-      initialRoute: "/",
       home: const HomePage(),
+      getPages: [
+        GetPage(name: "/", page: () => const HomePage()),
+        GetPage(name: "/detail", page: () => const DetailPage()),
+      ],
     );
   }
 }
