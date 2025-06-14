@@ -55,20 +55,7 @@ class MovieWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(movie.title, style: ThemeFonts.titleSmall),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.favorite_border_rounded),
-                        onPressed: () {
-                          ///TODO: Implement favourite functionality
-                        },
-                      ),
-                    ],
-                  ),
+                  Text(movie.title, style: ThemeFonts.titleSmall),
                   const SizedBox(height: 8),
                   Text(
                     movie.overview,

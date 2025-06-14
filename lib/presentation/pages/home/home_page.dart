@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/core/extensions/color_extension.dart';
-import 'package:movie_app/core/extensions/number_extension.dart';
 import 'package:movie_app/core/themes/theme_fonts.dart';
 import 'package:movie_app/core/themes/theme_padding.dart';
 import 'package:movie_app/presentation/controllers/movies/movies_binding.dart';
 import 'package:movie_app/presentation/controllers/movies/movies_controller.dart';
+import 'package:movie_app/presentation/pages/favorite/favorite_page.dart';
+import 'package:movie_app/presentation/pages/home/widgets/empty_movie_widget.dart';
 import 'package:movie_app/presentation/pages/home/widgets/movie_widget.dart';
 import 'package:movie_app/presentation/pages/home/widgets/search_widget.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,10 +51,18 @@ class _HomePageState extends State<HomePage> {
       builder: (controller) {
         return Scaffold(
           backgroundColor: Colors.white,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: HexColor("5474FF"),
+            onPressed: () {
+              Get.to(FavoritePage());
+            },
+            child: Icon(Icons.favorite, color: Colors.white,),
+          ),
           appBar: AppBar(
             title: Text("Movies", style: ThemeFonts.titleSmall),
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.transparent,
+            actionsPadding: ThemePadding.pr16 + ThemePadding.pb16,
             elevation: 8,
             bottom: SearchWidget(controller: _searchController),
           ),
@@ -70,23 +80,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   )
-                  : Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 16.ds,
-                      children: [
-                        Text("No movies found", style: ThemeFonts.titleMedium),
-                        Text(
-                          "There is nothing here.\nWe will notify you if something coming.",
-                          textAlign: TextAlign.center,
-                          style: ThemeFonts.bodyXSmall.copyWith(
-                            color: HexColor("A9A9A9"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  : EmptyMovieWidget(),
         );
       },
     );

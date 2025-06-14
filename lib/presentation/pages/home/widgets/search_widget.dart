@@ -11,7 +11,7 @@ class SearchWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: ThemePadding.pa16,
+      padding: ThemePadding.ph16 + ThemePadding.pb16 + ThemePadding.pt16,
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
@@ -30,5 +30,5 @@ class SearchWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 20);
 }
