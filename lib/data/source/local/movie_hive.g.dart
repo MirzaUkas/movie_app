@@ -17,24 +17,27 @@ class MovieHiveAdapter extends TypeAdapter<MovieHive> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MovieHive(
-      title: fields[0] as String,
-      overview: fields[1] as String,
-      releasedAt: fields[3] as String,
-      urlPoster: fields[2] as String,
+      id: fields[0] as int,
+      title: fields[1] as String,
+      overview: fields[2] as String,
+      releasedAt: fields[4] as DateTime,
+      urlPoster: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, MovieHive obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.title)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.overview)
+      ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.urlPoster)
+      ..write(obj.overview)
       ..writeByte(3)
+      ..write(obj.urlPoster)
+      ..writeByte(4)
       ..write(obj.releasedAt);
   }
 

@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/core/utils/size_util.dart';
+import 'package:movie_app/data/source/local/movie_local_data_source_impl.dart';
 import 'package:movie_app/presentation/pages/detail/detail_page.dart';
 import 'package:movie_app/presentation/pages/home/home_page.dart';
 
 import 'core/di/dependency.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Initialize DI
   DependencyCreator.init();
+
+  /// Initialize Hive
+  Get.find<MovieLocalDataSourceImpl>().initDb();
 
   /// Initialize System UI Mode & Orientation
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
