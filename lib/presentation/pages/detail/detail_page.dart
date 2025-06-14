@@ -92,15 +92,26 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  movie.isFavorite
+                                      ? _moviesController.deleteFavorite(
+                                        movie.id,
+                                      )
+                                      : _moviesController.addFavorite(movie);
+                                },
                                 style: IconButton.styleFrom(
                                   shape: CircleBorder(
                                     side: BorderSide(color: HexColor("E9E9E9")),
                                   ),
                                 ),
                                 icon: Icon(
-                                  Icons.favorite_border_rounded,
-                                  color: HexColor("E9E9E9"),
+                                  movie.isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border_rounded,
+                                  color:
+                                      movie.isFavorite
+                                          ? HexColor("5474FF")
+                                          : HexColor("E9E9E9"),
                                 ),
                               ),
                             ],
