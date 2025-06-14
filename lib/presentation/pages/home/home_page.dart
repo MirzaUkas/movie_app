@@ -10,7 +10,6 @@ import 'package:movie_app/presentation/pages/home/widgets/empty_movie_widget.dar
 import 'package:movie_app/presentation/pages/home/widgets/movie_widget.dart';
 import 'package:movie_app/presentation/pages/home/widgets/search_widget.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -56,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Get.to(FavoritePage());
             },
-            child: Icon(Icons.favorite, color: Colors.white,),
+            child: Icon(Icons.favorite, color: Colors.white),
           ),
           appBar: AppBar(
             title: Text("Movies"),
@@ -70,17 +69,23 @@ class _HomePageState extends State<HomePage> {
           ),
           body:
               _moviesController.movies.isNotEmpty
-                  ? ListView.separated(
-                    padding: ThemePadding.ph16,
-                    controller: _scrollController,
-                    itemCount: _moviesController.movies.length,
-                    separatorBuilder:
-                        (context, index) => const SizedBox(height: 16),
-                    itemBuilder: (context, index) {
-                      return MovieWidget(
-                        movie: _moviesController.movies[index],
-                      );
+                  ? RefreshIndicator(
+                    onRefresh: () async {
+                      _searchController.clear();
+                      _moviesController.fetchData('');
                     },
+                    child: ListView.separated(
+                      padding: ThemePadding.ph16,
+                      controller: _scrollController,
+                      itemCount: _moviesController.movies.length,
+                      separatorBuilder:
+                          (context, index) => const SizedBox(height: 16),
+                      itemBuilder: (context, index) {
+                        return MovieWidget(
+                          movie: _moviesController.movies[index],
+                        );
+                      },
+                    ),
                   )
                   : EmptyMovieWidget(),
         );
