@@ -2,14 +2,20 @@
 
 ## 1. UI/UX Design
 This application essentially consists of just three pages: home, detail, and favorite. I chose this approach for the sake of simplicity and to save development time.
-![alt text](/assets/docs/app_intro_ios.gif) ![alt text](/assets/docs/app_intro_android.gif)
+
+<img src="/assets/docs/app_intro_ios.gif" width="200" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/assets/docs/app_intro_android.gif" width="250" />
 
 ## a. Movie Card
 Each movie card displays four key pieces of information: the poster image, title, overview, and release date. I included these because they are essential and help keep the information clear and concise. Unlike most movie apps that typically show only the poster, I designed the layout to be both distinctive and informative, aiming to stand out while providing more useful content at a glance.
-![alt text](/assets/docs/movie_card.png)
+
+<img src="/assets/docs/movie_card.png" width="200" />
+
 ## b. Favorite Floating Action Button
 The favorite button is designed as a floating action button to make it easily noticeable without interfering with the main content.
-![alt text](/assets/docs/floating_action_button.png)
+
+
+<img src="/assets/docs/floating_action_button.png" width="200" />
+
 ## 2. Caching (Image Caching)
 
 One of the caching techniques I applied is using packages like `cached_network_image` to prevent re-downloading images.
