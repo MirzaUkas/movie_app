@@ -40,7 +40,9 @@ class _DetailPageState extends State<DetailPage> {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: Text("Detail Movie", style: ThemeFonts.titleSmall),
+            title: Text("Detail Movie"),
+            centerTitle: true,
+            titleTextStyle:  ThemeFonts.titleSmall.copyWith(color: Colors.black),
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.transparent,
             elevation: 8,

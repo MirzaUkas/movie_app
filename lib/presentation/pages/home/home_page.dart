@@ -59,7 +59,9 @@ class _HomePageState extends State<HomePage> {
             child: Icon(Icons.favorite, color: Colors.white,),
           ),
           appBar: AppBar(
-            title: Text("Movies", style: ThemeFonts.titleSmall),
+            title: Text("Movies"),
+            titleTextStyle: ThemeFonts.titleSmall.copyWith(color: Colors.black),
+            centerTitle: true,
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.transparent,
             actionsPadding: ThemePadding.pr16 + ThemePadding.pb16,
